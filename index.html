@@ -2,12 +2,24 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>나의 체스 게임</title>
+    <title>컴퓨터와 체스 대결!</title>
+    <link rel="stylesheet" href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css">
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"></script>
 </head>
 <body>
-    <h1>즐거운 체스 한판!</h1>
-    <div id="game-board"></div>
+    <h1>컴퓨터와 체스 한판!</h1>
+    <div id="game-board" style="width: 400px"></div>
+    <div class="info">
+        <p><strong>상태:</strong> <span id="status"></span></p>
+        <p><strong>컴퓨터 레벨 선택:</strong>
+            <button data-level="1">쉬움</button>
+            <button data-level="5">보통</button>
+            <button data-level="10">어려움</button>
+        </p>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>

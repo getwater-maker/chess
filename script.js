@@ -87,6 +87,7 @@ const config = {
     draggable: true,
     position: 'start',
     onDrop: onDrop,
+    pieceTheme: 'https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/img/chesspieces/wikipedia/{piece}.png' // 그림 파일 경로 설정
 };
 board = Chessboard('game-board', config);
 updateStatus();

@@ -1,9 +1,7 @@
 name: Auto Blogger
 
 on:
-  schedule:
-    - cron: "0 0 * * *"  # 매일 오전 9시(한국시간)에 자동 실행
-  workflow_dispatch:      # 수동 실행 버튼도 허용
+  workflow_dispatch:
 
 jobs:
   autopost:
@@ -11,20 +9,28 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v4
         with:
           python-version: "3.12"
 
       - name: Install dependencies
         run: |
-          pip install google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Create client_secret.json and token.json
+        run: |
+          echo "$CLIENT_SECRET_JSON" > client_secret.json
+          echo "$TOKEN_JSON" > token.json
+        env:
+          CLIENT_SECRET_JSON: ${{ secrets.CLIENT_SECRET_JSON }}
+          TOKEN_JSON: ${{ secrets.TOKEN_JSON }}
 
       - name: Run Auto Posting Script
+        run: python main.py
         env:
-          BLOG_ID: ${{ secrets.BLOG_ID }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: |
-          python main.py
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
